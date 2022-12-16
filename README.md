@@ -8,3 +8,11 @@ At the heart of this is two basic scripts: one to harvest a list of all the comp
 Another script, built off the PyVis library, then converts these into interactive network maps. Active directors are green. Resigned/inactive directors are greyed out. A node cna be highighted (orange) but adding its identifier code into the function callback.
 
 ![image](https://user-images.githubusercontent.com/69304112/208037675-4dd81ad8-75dc-43e8-9dfa-55b07df23e06.png)
+
+These basic scripts can be then be used to build dataframes of groups of companies, by entering the list of all company ids. 
+
+Another script takes one company id, finds all persons associated with it, then finds their other associated companies and the other people that it has as officers of PSCs. 
+
+These bigger dataframes then allow for intersting analyses - such as checking for any connections between two groups of companies.
+
+![image](https://user-images.githubusercontent.com/69304112/208041369-340c8a6d-712c-456d-9997-aeb140048913.png)
