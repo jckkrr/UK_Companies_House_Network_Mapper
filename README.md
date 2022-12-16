@@ -15,4 +15,4 @@ Another script takes one company id, finds all persons associated with it, then 
 
 These bigger dataframes then allow for intersting analyses - such as checking for any connections between two groups of companies.
 
-![image](https://user-images.githubusercontent.com/69304112/208041369-340c8a6d-712c-456d-9997-aeb140048913.png)
+![image](https://user-images.githubusercontent.com/69304112/208041838-82c2f039-00fc-4b0d-a91f-0be29f2cb402.png)
