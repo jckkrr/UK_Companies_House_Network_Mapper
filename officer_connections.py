@@ -234,7 +234,7 @@ if len(api_key) > 10:
                 
                 G = nx.Graph()
                 for index, row in dfCOMPANYPEOPLE.iterrows():
-                    node_name, node_company = row['name'], row['nationality']
+                    node_name, node_company = row['name'], row['company_name']
                     G.add_node(node_name, color='red')
                     G.add_node(node_company, color='green')
                     G.add_edge(node_name, node_company)
