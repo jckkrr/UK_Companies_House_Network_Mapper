@@ -247,7 +247,7 @@ if len(api_key) > 10:
                 fig.save_graph(f'temp.html')
                 HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
 
-                components.html(HtmlFile.read(), height=550)
+                components.html(HtmlFile.read(), height=580)
                 
                 st.write(G.nodes)
                 #################################
