@@ -206,7 +206,7 @@ if len(api_key) > 10:
 
             officer_ids = dfSEARCH.loc[selected_options, 'officer_id'].to_list()
 
-            #st.write(officer_ids)
+            st.write(officer_ids)
 
             dfAPPOINTMENTS = getOfficerAppointments(officer_ids)
             st.dataframe(dfAPPOINTMENTS)
@@ -229,9 +229,7 @@ if len(api_key) > 10:
                 import networkx as nx
                 import streamlit.components.v1 as components
                 import pyvis
-                
-                #G = nx.from_pandas_edgelist(dfCOMPANYPEOPLE, 'name', 'company_name', None)
-                
+                                
                 G = nx.Graph()
                 for index, row in dfCOMPANYPEOPLE.iterrows():
                     node_name, node_company = row['name'], row['company_name']
@@ -255,6 +253,10 @@ if len(api_key) > 10:
                 st.write('More details:')
                 st.dataframe(dfCOMPANYPEOPLE)
                 
+st.write('')
+st.write('This is the basic version of our UKCH Network Mapper. Want the more advanced option?')
+st.write('Just email us the company IDs you are after and we will get back to you.')
+st.write('studio@constituent.au')
 st.write('')
 st.write('')
 st.write('&#11041; More tools at www.constituent.au')
