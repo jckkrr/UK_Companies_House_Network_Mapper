@@ -1,4 +1,5 @@
-## streamlit run "C:\Users\Jack\Documents\Python_projects\uk_companies_house_byAPI\streamlit_app.py"
+## streamlit run "C:\Users\Jack\Documents\Python_projects\uk_companies_house_byAPI\officer_connections.py"
+
 
 import pandas as pd
 from requests import get
@@ -123,27 +124,49 @@ def getCompanyPeople(company_numbers):
     for company_number in company_numbers:
         
         st.write(company_number)
-    
+        
+        dfC = pd.DataFrame()
+        
+        company_name = None
+        company_name_url = f"https://api.companieshouse.gov.uk/company/{company_number}"
+        company_name_response = requests.get(company_name_url, auth=(api_key, ''))
+        company_name_js = company_name_response.json()  
+        if 'company_name' in company_name_js.keys():
+            company_name = company_name_js['company_name']
+        
+        
         ### Get Officers ###
 
         company_url = f"https://api.companieshouse.gov.uk/company/{company_number}/officers"
-        company_response = requests.get(company_url, auth=(api_key, '')).json()
+        company_response = requests.get(company_url, auth=(api_key, ''))        
+        js = company_response.json()
 
-        for item in company_response['items']:
-            dfx = unpack_json_into_dataframe(item)
-            dfx['person_type'] = 'Officer'
-            df = pd.concat([df, dfx])
+        if 'items' in js.keys():
+            for item in js['items']:
+                dfx = unpack_json_into_dataframe(item)
+                dfx['person_type'] = 'Officer'
+                dfC = pd.concat([dfC, dfx])
 
 
         ### Get PSCS ###
 
         company_url = f"https://api.companieshouse.gov.uk/company/{company_number}/persons-with-significant-control"
-        company_response = requests.get(company_url, auth=(api_key, '')).json()
-
-        for item in company_response['items']:
-            dfx = unpack_json_into_dataframe(item)
-            dfx['person_type'] = 'PSC'
-            df = pd.concat([df, dfx])
+        company_response = requests.get(company_url, auth=(api_key, ''))
+        js = company_response.json()
+        
+        if 'items' in js.keys():
+            for item in js['items']:
+                dfx = unpack_json_into_dataframe(item)
+                dfx['person_type'] = 'PSC'
+                dfC = pd.concat([dfC, dfx])
+                
+        dfC['company_number'] = company_number
+        dfC['company_name'] = company_name
+        df = pd.concat([df, dfC])
+    
+    first_columns = ['name', 'person_type', 'officer_role', 'date_of_birth:year', 'date_of_birth:month', 'nationality', 'country_of_residence', 'company_number', 'company_name']
+    ordered_columns = [x for x in first_columns if x in df.columns] + [x for x in df.columns if x not in first_columns]    
+    df = df[ordered_columns]
     
     return df
 
@@ -156,6 +179,7 @@ st.write('Constituent Investigative Analytics Studio')
 st.write('# UK COMPANIES HOUSE OFFICER CONNECTIONS CHECKER #####')
 
 api_key = st.text_input('Please enter API key')
+#api_key = ''
 
 if len(api_key) > 10:
 
@@ -174,7 +198,7 @@ if len(api_key) > 10:
 
         st.write('Selected:', ', '.join(selected_options_byname))
 
-        proceed = st.radio('Ready to go?', ['no','yes'], horizontal=True)
+        proceed = st.radio('Ready to go?', ['yes', 'no'], horizontal=True)
 
         if proceed == 'yes':
 
@@ -182,7 +206,7 @@ if len(api_key) > 10:
 
             officer_ids = dfSEARCH.loc[selected_options, 'officer_id'].to_list()
 
-            st.write(officer_ids)
+            #st.write(officer_ids)
 
             dfAPPOINTMENTS = getOfficerAppointments(officer_ids)
             st.dataframe(dfAPPOINTMENTS)
@@ -198,11 +222,33 @@ if len(api_key) > 10:
                 all_individuals = list(dfCOMPANYPEOPLE['name'].unique())
 
                 st.write('These are the people connected to the person(s) who searched for:')
+                
+                ############### VISUALISE ############################
+                
+                import plotly.graph_objects as go
+                import networkx as nx
+                import streamlit.components.v1 as components
+                import pyvis
+                
+                G = nx.from_pandas_edgelist(dfCOMPANYPEOPLE, 'name', 'company_name', None)
+
+                fig = pyvis.network.Network(width=800, width=1000, directed=False)
+
+                fig.from_nx(G)
+
+                path = '/tmp'
+                fig.save_graph(f'temp.html')
+                HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
+
+                components.html(HtmlFile.read(), height=800)
+                
+                
+                #################################
+                
                 st.write(all_individuals)
 
                 st.write('More details:')
                 st.dataframe(dfCOMPANYPEOPLE)
-                
                 
 st.write('')
 st.write('')
