@@ -232,7 +232,7 @@ if len(api_key) > 10:
                 
                 G = nx.from_pandas_edgelist(dfCOMPANYPEOPLE, 'name', 'company_name', None)
 
-                fig = pyvis.network.Network(height=800, width=1000, directed=False)
+                fig = pyvis.network.Network(width=1000, directed=False)
 
                 fig.from_nx(G)
 
