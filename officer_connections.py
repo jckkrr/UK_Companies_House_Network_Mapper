@@ -230,7 +230,14 @@ if len(api_key) > 10:
                 import streamlit.components.v1 as components
                 import pyvis
                 
-                G = nx.from_pandas_edgelist(dfCOMPANYPEOPLE, 'name', 'company_name', None)
+                #G = nx.from_pandas_edgelist(dfCOMPANYPEOPLE, 'name', 'company_name', None)
+                
+                G = nx.Graph()
+                for index, row in df.iterrows():
+                    node_name, node_company = row['name'], row['nationality']
+                    G.add_node(node_name, color='red')
+                    G.add_node(node_company, color='green')
+                    G.add_edge(node_name, node_company)
 
                 fig = pyvis.network.Network(width=1000, directed=False)
 
@@ -240,13 +247,11 @@ if len(api_key) > 10:
                 fig.save_graph(f'temp.html')
                 HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
 
-                components.html(HtmlFile.read(), height=800)
+                components.html(HtmlFile.read(), height=550)
                 
-                
+                st.write(G.nodes)
                 #################################
                 
-                st.write(all_individuals)
-
                 st.write('More details:')
                 st.dataframe(dfCOMPANYPEOPLE)
                 
