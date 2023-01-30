@@ -84,6 +84,7 @@ def getOfficerAppointments(officer_ids):
 
         for item in js['items']:
             dfx = unpack_json_into_dataframe(item)
+            dfx['officer_id'] = officer_id    
             df = pd.concat([df,dfx])
 
         df = df.reset_index(drop=True)
@@ -95,13 +96,7 @@ def getOfficerAppointments(officer_ids):
                         df[f'{key.strip()}:{subkey.strip()}'] = js[key][subkey]
                 else:
                     df[key.strip()] = js[key]
-
-        try:
-            df['officer_id'] = df['links:self'].apply(lambda x: re.findall('/officers/(.*)/appoint',x)[0]) #.group(1)
-        except:
-            df['officer_id'] = 'X'
-            
-            
+                    
         for col in ['date_of_birth:year', 'date_of_birth:month']:
             if col in df.columns:
                 df[col] = df[col].fillna(0)
@@ -253,10 +248,11 @@ if len(api_key) > 10:
                 st.write('More details:')
                 st.dataframe(dfCOMPANYPEOPLE)
                 
-st.write('')
-st.write('This is the basic version of our UKCH Network Mapper. Want the more advanced option?')
-st.write('Just email us the company IDs you are after and we will get back to you.')
-st.write('studio@constituent.au')
+                st.write('')
+                st.write('This is the basic version of our UKCH Network Mapper. Want the more advanced option?')
+                st.write('Just email us the company IDs you are after and we will get back to you.')
+                st.write('studio@constituent.au')
+                
 st.write('')
 st.write('')
 st.write('&#11041; More tools at www.constituent.au')
