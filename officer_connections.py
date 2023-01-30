@@ -233,7 +233,7 @@ if len(api_key) > 10:
                 #G = nx.from_pandas_edgelist(dfCOMPANYPEOPLE, 'name', 'company_name', None)
                 
                 G = nx.Graph()
-                for index, row in df.iterrows():
+                for index, row in dfCOMPANYPEOPLE.iterrows():
                     node_name, node_company = row['name'], row['nationality']
                     G.add_node(node_name, color='red')
                     G.add_node(node_company, color='green')
