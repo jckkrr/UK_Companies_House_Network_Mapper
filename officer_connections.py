@@ -8,10 +8,10 @@ import requests
 import streamlit as st
 import streamlit.components.v1 as components
 
-headers = {
-    "api_key": st.secrets['api_key'],
-    "content-type": "application/json"
-}
+#headers = {
+ #   "api_key": st.secrets['api_key'],
+  #  "content-type": "application/json"
+#}
 
 ### functions
 
@@ -221,7 +221,8 @@ st.write('Find which other people are a business director is connected to in the
 st.write('This tool uses the UKCH API to find an individual, all the businesses they are an officer of and all other officers involved in those business.')
 
 #api_key = st.text_input('Please enter API key')
-api_key = headers["api_key"]
+#api_key = headers["api_key"]
+api_key = "675a16ec-fb59-4570-a69c-30dd389a0ed7"
 
 if len(api_key) > 10:
 
@@ -299,7 +300,7 @@ if len(api_key) > 10:
                         if name.split(' ')[0] in ['MRS', 'MS', 'MISS', 'MR']:
                             dfPLOT.loc[index, 'name'] = ' '.join(name.split(' ')[1:])
                                                         
-                    g = Network(height=1500, width=800, notebook=True, directed=False)
+                    g = Network(height=800, width=800, notebook=True, directed=False)
                     
                     ### Add person nodes
                     for index, row in dfPLOT.iterrows():
@@ -337,7 +338,7 @@ if len(api_key) > 10:
                     path = '/tmp'
                     g.save_graph(f'temp.html')
                     HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
-                    components.html(HtmlFile.read(), height=550, width=700)
+                    components.html(HtmlFile.read(), width=800, height=800, )
                     
                 makePlotPYVIS(dfCOMPANYPEOPLE, 'company_name')
                 
@@ -418,4 +419,4 @@ if len(api_key) > 10:
                 
 st.write('')
 st.write('')
-st.write('&#11041; More tools at www.constituent.au')
+st.write('&#11041; More tools at constituent.au')
