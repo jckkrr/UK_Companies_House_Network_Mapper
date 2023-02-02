@@ -300,7 +300,9 @@ if len(api_key) > 10:
                         if name.split(' ')[0] in ['MRS', 'MS', 'MISS', 'MR']:
                             dfPLOT.loc[index, 'name'] = ' '.join(name.split(' ')[1:])
                                                         
-                    g = Network(width=550, height=550, notebook=False, directed=False)
+                    g = pyvis.network.Network(width=550, height=550, notebook=False, directed=False)
+                    
+                    #g = nx.Graph()
                     
                     ### Add person nodes
                     for index, row in dfPLOT.iterrows():
@@ -335,6 +337,14 @@ if len(api_key) > 10:
                     
                     
                     ### display
+                    
+                    import networkx as nx
+                    
+                    #fig = pyvis.network.Network(height= 700, width=700, directed=False)
+
+                    #fig.from_nx(g)
+                    
+                    
                     path = '/tmp'
                     g.save_graph(f'temp.html')
                     HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
@@ -351,7 +361,7 @@ if len(api_key) > 10:
                 ############### VISUALISE ############################
                 
                 import plotly.graph_objects as go
-                import networkx as nx
+                
                 
                 import pyvis
                              
