@@ -301,9 +301,9 @@ if len(api_key) > 10:
                         if name.split(' ')[0] in ['MRS', 'MS', 'MISS', 'MR']:
                             dfPLOT.loc[index, 'name'] = ' '.join(name.split(' ')[1:])
                                                         
-                    #g = pyvis.network.Network(width=550, height=550, notebook=False, directed=False)
+                    g = pyvis.network.Network(notebook=False, directed=False)
                            
-                    g = nx.Graph()   
+                    #g = nx.Graph()   
                         
                     ### Add person nodes
                     for index, row in dfPLOT.iterrows():
@@ -341,17 +341,17 @@ if len(api_key) > 10:
                     
                     
                     
-                    fig = pyvis.network.Network(directed=False)
+                    #fig = pyvis.network.Network(directed=False)
 
-                    fig.from_nx(g)
+                    #fig.from_nx(g)
                     
                     
                     path = '/tmp'
-                    fig.save_graph(f'temp.html')
+                    #fig.save_graph(f'temp.html')
+                    g.save_graph(f'temp.html')
                     HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
                     components.html(HtmlFile.read(), width=700, height=500)
                     
-                    #components.iframe(f'temp.html')
                     
                 makePlotPYVIS(dfCOMPANYPEOPLE, 'company_name')
                 
