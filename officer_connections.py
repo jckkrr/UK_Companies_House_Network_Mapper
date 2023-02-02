@@ -300,7 +300,7 @@ if len(api_key) > 10:
                         if name.split(' ')[0] in ['MRS', 'MS', 'MISS', 'MR']:
                             dfPLOT.loc[index, 'name'] = ' '.join(name.split(' ')[1:])
                                                         
-                    g = Network(width=800, height=800, notebook=False, directed=False)
+                    g = Network(width=550, height=550, notebook=False, directed=False)
                     
                     ### Add person nodes
                     for index, row in dfPLOT.iterrows():
@@ -338,7 +338,7 @@ if len(api_key) > 10:
                     path = '/tmp'
                     g.save_graph(f'temp.html')
                     HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
-                    components.html(HtmlFile.read(), width=800, height=800)
+                    components.html(HtmlFile.read(), width=550, height=550)
                     
                     #components.iframe(f'temp.html')
                     
@@ -378,15 +378,15 @@ if len(api_key) > 10:
                         G.add_node(node_company, color='rgba(180,150,150,0.8)')
                         G.add_edge(node_name, node_company)
                         
-                    fig = pyvis.network.Network(height= 700, width=700, directed=False)
+                    #fig = pyvis.network.Network(height= 700, width=700, directed=False)
 
-                    fig.from_nx(G)
+                    #fig.from_nx(G)
 
-                    path = '/tmp'
-                    fig.save_graph(f'temp.html')
-                    HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
+                    #path = '/tmp'
+                    #fig.save_graph(f'temp.html')
+                    #HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
 
-                    components.html(HtmlFile.read(), height=700, width=700)
+                    #components.html(HtmlFile.read(), height=700, width=700)
                     
                 #makePlot(dfCOMPANYPEOPLE, 'company_name')
                     
