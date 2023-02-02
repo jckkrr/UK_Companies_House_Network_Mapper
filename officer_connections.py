@@ -389,7 +389,7 @@ if len(api_key) > 10:
                         G.add_node(node_company, color='rgba(180,150,150,0.8)')
                         G.add_edge(node_name, node_company)
                         
-                    fig = pyvis.network.Network(height= 700, width=700, directed=False)
+                    fig = pyvis.network.Network(directed=False)
 
                     fig.from_nx(G)
 
