@@ -334,7 +334,7 @@ if len(api_key) > 10:
                         target_node_color = 'rgba(0, 150, 100, 0.5)'
                         g.add_node(target, color=target_node_color, size=target_node_size, shape='dot', title=target, font=(f'12 Manrope rgba(22,22,22,1)'),)
                         
-                        g.add_edge(source, target, weight=5, title='x', color='rgba(122,122,122,0.6)')
+                        g.add_edge(source, target, weight=5, title='x', color='rgba(122,122,122,0.6)', weight=1)
                     
                     
                     ### display
@@ -353,7 +353,7 @@ if len(api_key) > 10:
                     
                     #components.iframe(f'temp.html')
                     
-                #makePlotPYVIS(dfCOMPANYPEOPLE, 'company_name')
+                makePlotPYVIS(dfCOMPANYPEOPLE, 'company_name')
                 
                 
                 
