@@ -333,11 +333,11 @@ if len(api_key) > 10:
                             node_shape = 'circularImage'
                             node_image = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0D8RJLIfGu9BfAEv3oMYyxiGfkGsGABeSsY6K2Ugy&s'
                         elif row['active'] == 1:
-                            node_color = 'rgba(125, 125, 222, 0.6)'
+                            node_color = 'rgba(0, 150, 100, 0.6)'
                         elif row['active'] == -1:
-                            node_color = 'rgba(125, 125, 222, 0.4)'
+                            node_color = 'rgba(0, 150, 100, 0.4)'
                         elif row['active'] == 0:
-                            node_color = 'rgba(125, 125, 222, 0.2)'
+                            node_color = 'rgba(0, 150, 100, 0.2)' 
                         else:
                             node_color = 'rgba(0, 0, 0, 1)' 
                          
@@ -345,7 +345,7 @@ if len(api_key) > 10:
 
                         ### company nodes
                         target_node_size = 10
-                        target_node_color = 'rgba(0, 150, 100, 0.5)'
+                        target_node_color = 'rgba(125, 125, 222, 0.5)'
                         g.add_node(target, color=target_node_color, size=target_node_size, shape='dot', title=target, font=(f'12 Manrope rgba(22,22,22,1)'),)
                         
                         g.add_edge(source, target, weight=1, title=f'{source}:{target}', color='rgba(122,122,122,0.6)')
