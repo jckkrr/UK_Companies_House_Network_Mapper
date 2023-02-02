@@ -353,7 +353,7 @@ if len(api_key) > 10:
                     
                     #components.iframe(f'temp.html')
                     
-                makePlotPYVIS(dfCOMPANYPEOPLE, 'company_name')
+                #makePlotPYVIS(dfCOMPANYPEOPLE, 'company_name')
                 
                 
                 
@@ -389,17 +389,17 @@ if len(api_key) > 10:
                         G.add_node(node_company, color='rgba(180,150,150,0.8)')
                         G.add_edge(node_name, node_company)
                         
-                    #fig = pyvis.network.Network(height= 700, width=700, directed=False)
+                    fig = pyvis.network.Network(height= 700, width=700, directed=False)
 
-                    #fig.from_nx(G)
+                    fig.from_nx(G)
 
-                    #path = '/tmp'
-                    #fig.save_graph(f'temp.html')
-                    #HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
+                    path = '/tmp'
+                    fig.save_graph(f'temp.html')
+                    HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
 
-                    #components.html(HtmlFile.read(), height=700, width=700)
+                    components.html(HtmlFile.read(), height=700, width=700)
                     
-                #makePlot(dfCOMPANYPEOPLE, 'company_name')
+                makePlot(dfCOMPANYPEOPLE, 'company_name')
                     
                 #################################
                 
