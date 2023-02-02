@@ -341,7 +341,7 @@ if len(api_key) > 10:
                     
                     
                     
-                    fig = pyvis.network.Network(height=500, width=700, directed=False)
+                    fig = pyvis.network.Network(directed=False)
 
                     fig.from_nx(g)
                     
@@ -353,7 +353,7 @@ if len(api_key) > 10:
                     
                     #components.iframe(f'temp.html')
                     
-                #makePlotPYVIS(dfCOMPANYPEOPLE, 'company_name')
+                makePlotPYVIS(dfCOMPANYPEOPLE, 'company_name')
                 
                 
                 
@@ -399,7 +399,7 @@ if len(api_key) > 10:
 
                     components.html(HtmlFile.read(), height=700, width=700)
                     
-                makePlot(dfCOMPANYPEOPLE, 'company_name')
+                #makePlot(dfCOMPANYPEOPLE, 'company_name')
                     
                 #################################
                 
