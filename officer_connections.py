@@ -300,7 +300,7 @@ if len(api_key) > 10:
                         if name.split(' ')[0] in ['MRS', 'MS', 'MISS', 'MR']:
                             dfPLOT.loc[index, 'name'] = ' '.join(name.split(' ')[1:])
                                                         
-                    g = Network(width=100, height=100, notebook=False, directed=False)
+                    g = Network(width=400, height=400, notebook=False, directed=False)
                     
                     ### Add person nodes
                     for index, row in dfPLOT.iterrows():
@@ -338,7 +338,9 @@ if len(api_key) > 10:
                     path = '/tmp'
                     g.save_graph(f'temp.html')
                     HtmlFile = open(f'temp.html', 'r', encoding='utf-8')
-                    components.html(HtmlFile.read(), width=600, height=700)
+                    components.html(HtmlFile.read(), width=400, height=400)
+                    
+                    #components.iframe(f'temp.html')
                     
                 makePlotPYVIS(dfCOMPANYPEOPLE, 'company_name')
                 
