@@ -243,7 +243,7 @@ api_key = headers["api_key"]
 
 if len(api_key) > 10:
 
-    search_term = st.text_input('Who would like to search for?', 'andreas krannich')  # 'josh landy' lydia alexandra gordon 'simon pearce' 'edward sheringham'
+    search_term = st.text_input('Who would like to search for?', 'heston blumenthal') 
 
     if len(search_term) > 0:
 
